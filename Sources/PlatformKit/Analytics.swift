@@ -7,7 +7,12 @@
 
 import Foundation
 
-public class AnalyticsImpl: Analytics {
+public final class AnalyticsImpl: Analytics {
+    
+    public init() {
+        
+    }
+    
     public func track(event: String) {
         
     }
