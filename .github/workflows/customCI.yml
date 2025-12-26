@@ -1,7 +1,7 @@
 # This workflow will build a Swift project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-name: Swift
+name: CustomCI
 
 on:
   push:
@@ -17,6 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build
-      run: swift build -v
+      run: codebuild -scheme PlatformKit -destination 'platform=iOS Simulator,name=iPhone 17' clean build
     - name: Run tests
-      run: swift test -v
+      run: codebuild -scheme PlatformKit -destination 'platform=iOS Simulator,name=iPhone 17' clean test
