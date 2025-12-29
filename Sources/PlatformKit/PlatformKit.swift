@@ -23,15 +23,19 @@ public protocol Analytics {
  *  APIs
  */
 
-public protocol FeedFeatureAPI {
+public protocol FeatureAPI {
+    var networking: Networking { get }
+}
+
+public protocol FeedFeatureAPI: FeatureAPI {
     func fetchFeeds() async throws -> FeedDTO
 }
 
-public protocol FriendsFeatureAPI {
+public protocol FriendsFeatureAPI: FeatureAPI {
     func fetchFeeds() async throws -> FriendsDTO
 }
 
-public protocol ProfileFeatureAPI {
+public protocol ProfileFeatureAPI: FeatureAPI {
     func fetchFeeds() async throws -> ProfileDTO
 }
 
