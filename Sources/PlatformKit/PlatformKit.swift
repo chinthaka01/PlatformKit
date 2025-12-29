@@ -28,17 +28,17 @@ public protocol FeatureAPI {
 }
 
 public protocol FeedFeatureAPI: FeatureAPI {
-    func fetchFeeds() async throws -> [Post]
-    func updatePost(_ post: Post) async throws
+    func fetchFeeds() async throws -> [Post]?
+    func updatePost(_ post: Post) async throws -> Post?
     func deletePost(_ post: Post) async throws
 }
 
 public protocol FriendsFeatureAPI: FeatureAPI {
-    func fetchFriends() async throws -> [User]
+    func fetchFriends() async throws -> [User]?
 }
 
 public protocol ProfileFeatureAPI: FeatureAPI {
-    func fetchProfile() async throws -> User
+    func fetchProfile() async throws -> User?
 }
 
 /**
