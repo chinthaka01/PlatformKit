@@ -17,6 +17,8 @@ public protocol Networking {
 
 public final class NetworkingImpl: Networking {
     
+    public init() {}
+    
     public func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T? {
         let uploadData = try JSONEncoder().encode(record)
 

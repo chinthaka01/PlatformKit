@@ -28,15 +28,17 @@ public protocol FeatureAPI {
 }
 
 public protocol FeedFeatureAPI: FeatureAPI {
-    func fetchFeeds() async throws -> FeedDTO
+    func fetchFeeds() async throws -> [Post]
+    func updatePost(_ post: Post) async throws
+    func deletePost(_ post: Post) async throws
 }
 
 public protocol FriendsFeatureAPI: FeatureAPI {
-    func fetchFeeds() async throws -> FriendsDTO
+    func fetchFriends() async throws -> [User]
 }
 
 public protocol ProfileFeatureAPI: FeatureAPI {
-    func fetchFeeds() async throws -> ProfileDTO
+    func fetchProfile() async throws -> User
 }
 
 /**
@@ -56,20 +58,4 @@ public protocol FriendsDependencies {
 public protocol ProfileDependencies {
     var profileAPI: ProfileFeatureAPI { get }
     var analytics: Analytics { get }
-}
-
-/**
- * DTOs
- */
-
-public protocol FeedDTO {
-    
-}
-
-public protocol FriendsDTO {
-    
-}
-
-public protocol ProfileDTO {
-    
 }
