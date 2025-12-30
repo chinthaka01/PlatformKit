@@ -17,7 +17,7 @@ public struct User: FeatureDataModel {
     public var company: Company
 }
 
-public struct Address: Codable, Identifiable, Sendable {
+public struct Address: Codable, Identifiable, Equatable, Sendable {
     public var id: Int?
     public var street: String
     public var suite: String
@@ -26,14 +26,14 @@ public struct Address: Codable, Identifiable, Sendable {
     public var geo: Geo
 }
 
-public struct Company: Codable, Identifiable, Sendable {
+public struct Company: Codable, Identifiable, Equatable, Sendable {
     public var id: Int?
     public var name: String
     public var catchPhrase: String
     public var bs: String
 }
 
-public struct Geo: Codable, Identifiable, Sendable {
+public struct Geo: Codable, Identifiable, Equatable, Sendable {
     public var id: Int?
     public var lat: String
     public var lng: String

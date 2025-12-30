@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol FeatureDataModel: Codable, Identifiable, Sendable {
+public protocol FeatureDataModel: Codable, Identifiable, Equatable, Sendable {
     var id: Int { get set }
 }
