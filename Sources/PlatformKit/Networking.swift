@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Networking {
+public protocol Networking: Sendable {
     func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T?
     func deleteRecord<T: FeatureDataModel>(url: URL, type: T.Type, withID id: Int) async throws
     
@@ -15,7 +15,7 @@ public protocol Networking {
     func fetchList<T: FeatureDataModel>(url: String, type: T.Type) async throws -> [T]
 }
 
-public final class NetworkingImpl: Networking, Sendable {
+public final class NetworkingImpl: Networking {
     
     public init() {}
     
