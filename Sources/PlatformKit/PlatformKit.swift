@@ -27,17 +27,17 @@ public protocol FeatureAPI {
     var networking: Networking { get }
 }
 
-public protocol FeedFeatureAPI: FeatureAPI {
+public protocol FeedFeatureAPI: FeatureAPI, Sendable {
     func fetchFeeds() async throws -> [Post]?
     func updatePost(_ post: Post) async throws -> Post?
     func deletePost(_ post: Post) async throws
 }
 
-public protocol FriendsFeatureAPI: FeatureAPI {
+public protocol FriendsFeatureAPI: FeatureAPI, Sendable {
     func fetchFriends() async throws -> [User]?
 }
 
-public protocol ProfileFeatureAPI: FeatureAPI {
+public protocol ProfileFeatureAPI: FeatureAPI, Sendable {
     func fetchProfile() async throws -> User?
 }
 

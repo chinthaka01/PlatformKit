@@ -15,7 +15,7 @@ public protocol Networking {
     func fetchList<T: FeatureDataModel>(url: String, type: T.Type) async throws -> [T]
 }
 
-public final class NetworkingImpl: Networking {
+public final class NetworkingImpl: Networking, Sendable {
     
     public init() {}
     
