@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Comment: FeatureDataModel {
-    public var id: Int?
+    public var id: Int
     public var postId: Int
     public var name: String
     public var email: String

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct User: FeatureDataModel {
-    public var id: Int?
+    public var id: Int
     public var name: String
     public var username: String
     public var address: Address
@@ -17,7 +17,7 @@ public struct User: FeatureDataModel {
     public var company: Company
 }
 
-public struct Address: FeatureDataModel {
+public struct Address: Codable, Identifiable, Sendable {
     public var id: Int?
     public var street: String
     public var suite: String
@@ -26,14 +26,14 @@ public struct Address: FeatureDataModel {
     public var geo: Geo
 }
 
-public struct Company: FeatureDataModel {
+public struct Company: Codable, Identifiable, Sendable {
     public var id: Int?
     public var name: String
     public var catchPhrase: String
     public var bs: String
 }
 
-public struct Geo: FeatureDataModel {
+public struct Geo: Codable, Identifiable, Sendable {
     public var id: Int?
     public var lat: String
     public var lng: String

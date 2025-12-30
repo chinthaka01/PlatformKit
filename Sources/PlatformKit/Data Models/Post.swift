@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Post: FeatureDataModel {
-    public var id: Int?
+    public var id: Int
     public var userId: Int
     public var title: String
     public var body: String

@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol FeatureDataModel: Codable, Identifiable, Sendable {
-    var id: Int? { get set }
+    var id: Int { get set }
 }
