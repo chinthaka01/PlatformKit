@@ -8,19 +8,25 @@
 import Foundation
 
 public protocol Networking: Sendable {
-    func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T
-    func deleteRecord<T: FeatureDataModel>(url: URL, type: T.Type, withID id: Int) async throws
+    func updateRecord<T: FeatureDataModel>(bffPath: String, type: T.Type, record: T) async throws -> T
+    func deleteRecord<T: FeatureDataModel>(bffPath: String, type: T.Type, withID id: Int) async throws
     
-    func fetchSingle<T: FeatureDataModel>(url: String,  type: T.Type) async throws -> T
-    func fetchList<T: FeatureDataModel>(url: String, type: T.Type) async throws -> [T]
+    func fetchSingle<T: FeatureDataModel>(bffPath: String,  type: T.Type) async throws -> T
+    func fetchList<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> [T]
 }
 
 public final class NetworkingImpl: Networking {
     
+    public let bffBase = "https://jsonplaceholder.typicode.com"
+    
     public init() {}
     
-    public func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T {
+    public func updateRecord<T: FeatureDataModel>(bffPath: String, type: T.Type, record: T) async throws -> T {
         let uploadData = try JSONEncoder().encode(record)
+        
+        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
+            throw URLError(.badURL)
+        }
 
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
@@ -37,8 +43,8 @@ public final class NetworkingImpl: Networking {
         return updatedRecord
     }
     
-    public func deleteRecord<T: FeatureDataModel>(url: URL, type: T.Type, withID id: Int) async throws {
-        guard let url = URL(string: "\(url)/\(id)") else {
+    public func deleteRecord<T: FeatureDataModel>(bffPath: String, type: T.Type, withID id: Int) async throws {
+        guard let url = URL(string: "\(bffBase)/\(bffPath)/\(id)") else {
             throw URLError(.badURL)
         }
 
@@ -62,8 +68,8 @@ public final class NetworkingImpl: Networking {
         }
     }
     
-    public func fetchSingle<T: FeatureDataModel>(url: String, type: T.Type) async throws -> T {
-        guard let url = URL(string: url) else {
+    public func fetchSingle<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> T {
+        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
             throw URLError(.badURL)
         }
 
@@ -77,8 +83,8 @@ public final class NetworkingImpl: Networking {
         return try JSONDecoder().decode(T.self, from: data)
     }
     
-    public func fetchList<T: FeatureDataModel>(url: String, type: T.Type) async throws -> [T] {
-        guard let url = URL(string: url) else {
+    public func fetchList<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> [T] {
+        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
             throw URLError(.badURL)
         }
 

@@ -13,21 +13,12 @@ struct NetworkingTests {
 
     let networking = NetworkingImpl()
 
-    /**
-     *  Demoing if we have separate BFF for the features.
-     */
-    let postBFFBase = "https://jsonplaceholder.typicode.com"
-    let userBFFBase = "https://jsonplaceholder.typicode.com"
-    let commentBFFBase = "https://jsonplaceholder.typicode.com"
-
     // MARK: - Fetch List
 
     @Test
     func fetchPostsList_success() async throws {
-        let url = "\(postBFFBase)/posts"
-
         let posts = try await networking.fetchList(
-            url: url,
+            bffPath: "posts",
             type: Post.self
         )
 
@@ -37,10 +28,8 @@ struct NetworkingTests {
     
     @Test
     func fetchUsersList_success() async throws {
-        let url = "\(userBFFBase)/users"
-
         let users = try await networking.fetchList(
-            url: url,
+            bffPath: "users",
             type: User.self
         )
 
@@ -50,10 +39,8 @@ struct NetworkingTests {
     
     @Test
     func fetchCommentsList_success() async throws {
-        let url = "\(commentBFFBase)/comments"
-
         let comments = try await networking.fetchList(
-            url: url,
+            bffPath: "comments",
             type: Comment.self
         )
 
@@ -65,10 +52,8 @@ struct NetworkingTests {
 
     @Test
     func fetchSinglePost_success() async throws {
-        let url = "\(postBFFBase)/posts/1"
-
         let post = try await networking.fetchSingle(
-            url: url,
+            bffPath: "posts/1",
             type: Post.self
         )
 
@@ -78,10 +63,8 @@ struct NetworkingTests {
     
     @Test
     func fetchSingleUser_success() async throws {
-        let url = "\(userBFFBase)/users/1"
-
         let user = try await networking.fetchSingle(
-            url: url,
+            bffPath: "users/1",
             type: User.self
         )
 
@@ -91,10 +74,8 @@ struct NetworkingTests {
     
     @Test
     func fetchSingleComment_success() async throws {
-        let url = "\(commentBFFBase)/comments/1"
-
         let comment = try await networking.fetchSingle(
-            url: url,
+            bffPath: "comments/1",
             type: Comment.self
         )
 
@@ -110,7 +91,7 @@ struct NetworkingTests {
 
         await #expect(throws: URLError.self) {
             try await networking.fetchList(
-                url: invalidURL,
+                bffPath: invalidURL,
                 type: Post.self
             )
         }
@@ -120,8 +101,6 @@ struct NetworkingTests {
 
     @Test
     func updatePostRecord_success() async throws {
-        let url = URL(string: "\(postBFFBase)/posts/1")!
-
         let updatedPost = Post(
             id: 1, userId: 1,
             title: "Updated Title",
@@ -129,19 +108,17 @@ struct NetworkingTests {
         )
 
         let result = try await networking.updateRecord(
-            url: url,
+            bffPath: "posts/1",
             type: Post.self,
             record: updatedPost
         )
 
-        #expect(result?.id == 1)
-        #expect(result?.title == "Updated Title")
+        #expect(result.id == 1)
+        #expect(result.title == "Updated Title")
     }
     
     @Test
     func updateUserRecord_success() async throws {
-        let url = URL(string: "\(userBFFBase)/users/1")!
-
         let updatedUser = User(
             id: 1,
             name: "Updated Name",
@@ -153,19 +130,17 @@ struct NetworkingTests {
         )
 
         let result = try await networking.updateRecord(
-            url: url,
+            bffPath: "users/1",
             type: User.self,
             record: updatedUser
         )
 
-        #expect(result?.id == 1)
-        #expect(result?.name == "Updated Name")
+        #expect(result.id == 1)
+        #expect(result.name == "Updated Name")
     }
     
     @Test
     func updateCommentRecord_success() async throws {
-        let url = URL(string: "\(commentBFFBase)/comments/1")!
-
         let updatedComment = Comment(
             id: 1, postId: 1,
             name: "Updated Name",
@@ -174,23 +149,21 @@ struct NetworkingTests {
         )
 
         let result = try await networking.updateRecord(
-            url: url,
+            bffPath: "comments/1",
             type: Comment.self,
             record: updatedComment
         )
 
-        #expect(result?.id == 1)
-        #expect(result?.name == "Updated Name")
+        #expect(result.id == 1)
+        #expect(result.name == "Updated Name")
     }
 
     // MARK: - Delete Record
 
     @Test
     func deletePostRecord_success() async throws {
-        let url = URL(string: "\(postBFFBase)/posts")!
-
         try await networking.deleteRecord(
-            url: url,
+            bffPath: "posts",
             type: Post.self,
             withID: 1
         )
@@ -200,10 +173,8 @@ struct NetworkingTests {
     
     @Test
     func deleteUserRecord_success() async throws {
-        let url = URL(string: "\(userBFFBase)/users")!
-
         try await networking.deleteRecord(
-            url: url,
+            bffPath: "users",
             type: User.self,
             withID: 1
         )
@@ -213,10 +184,8 @@ struct NetworkingTests {
     
     @Test
     func deleteCommentRecord_success() async throws {
-        let url = URL(string: "\(commentBFFBase)/comments")!
-
         try await networking.deleteRecord(
-            url: url,
+            bffPath: "comments",
             type: Comment.self,
             withID: 1
         )
