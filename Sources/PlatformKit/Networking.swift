@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol Networking: Sendable {
-    func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T?
+    func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T
     func deleteRecord<T: FeatureDataModel>(url: URL, type: T.Type, withID id: Int) async throws
     
     func fetchSingle<T: FeatureDataModel>(url: String,  type: T.Type) async throws -> T
@@ -19,7 +19,7 @@ public final class NetworkingImpl: Networking {
     
     public init() {}
     
-    public func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T? {
+    public func updateRecord<T: FeatureDataModel>(url: URL, type: T.Type, record: T) async throws -> T {
         let uploadData = try JSONEncoder().encode(record)
 
         var request = URLRequest(url: url)
