@@ -16,7 +16,12 @@ public protocol FeatureFactory {
 }
 
 public protocol Analytics {
-    func track(event: String)
+    /**
+     *  Just for the demo purpose.
+     *  Not Using a actual backend analytics tool.
+     *  Just printing the analytics log.
+     */
+    func track(_ event: String, parameters: [String: String]?)
 }
 
 /**

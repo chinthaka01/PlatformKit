@@ -13,7 +13,11 @@ public final class AnalyticsImpl: Analytics {
         
     }
     
-    public func track(event: String) {
-        
+    public func track(_ event: String, parameters: [String : String]?) {
+        if let parameters = parameters, !parameters.isEmpty {
+            print("📊 [Analytics] \(event) – \(parameters)")
+        } else {
+            print("📊 [Analytics] \(event)")
+        }
     }
 }
