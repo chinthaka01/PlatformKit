@@ -22,9 +22,9 @@ public final class AnalyticsImpl: Analytics {
     
     public func track(_ event: AnalyticsEvent) {
         if let parameters = event.parameters, !parameters.isEmpty {
-            print("📊 [Analytics] \(event) – \(parameters)")
+            print("📊 [Analytics] \(event.name) – \(parameters)")
         } else {
-            print("📊 [Analytics] \(event)")
+            print("📊 [Analytics] \(event.name)")
         }
     }
 }
