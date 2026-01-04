@@ -15,15 +15,6 @@ public protocol FeatureFactory {
     func makeFeature() -> MicroFeature
 }
 
-public protocol Analytics {
-    /**
-     *  Just for the demo purpose.
-     *  Not Using a actual backend analytics tool.
-     *  Just printing the analytics log.
-     */
-    func track(_ event: String, parameters: [String: String]?)
-}
-
 /**
  *  APIs
  */
