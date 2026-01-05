@@ -55,3 +55,13 @@ public protocol ProfileDependencies {
     var profileAPI: ProfileFeatureAPI { get }
     var analytics: Analytics { get }
 }
+
+/**
+ *  Broadcast
+ */
+
+public enum AppBroadcast {
+
+    //  Notification name for the count of posts of the logged-in user.
+    public static let selfPostsCount = Notification.Name("selfPostsCount")
+}
