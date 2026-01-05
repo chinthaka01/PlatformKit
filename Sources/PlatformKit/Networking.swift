@@ -17,9 +17,42 @@ public protocol Networking: Sendable {
 
 public final class NetworkingImpl: Networking {
     
+    /**
+     *  This is a free 3rd party API using for the demo purpose as the  backend for frontend (BFF).
+     */
     public let bffBase = "https://jsonplaceholder.typicode.com"
     
     public init() {}
+    
+    public func fetchSingle<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> T {
+        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
+            throw URLError(.badURL)
+        }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+    
+    public func fetchList<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> [T] {
+        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
+            throw URLError(.badURL)
+        }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode([T].self, from: data)
+    }
     
     public func updateRecord<T: FeatureDataModel>(bffPath: String, type: T.Type, record: T) async throws -> T {
         let uploadData = try JSONEncoder().encode(record)
@@ -66,35 +99,5 @@ public final class NetworkingImpl: Networking {
             }
             throw URLError(.cannotDecodeContentData)
         }
-    }
-    
-    public func fetchSingle<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> T {
-        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
-            throw URLError(.badURL)
-        }
-
-        let (data, response) = try await URLSession.shared.data(from: url)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-
-        return try JSONDecoder().decode(T.self, from: data)
-    }
-    
-    public func fetchList<T: FeatureDataModel>(bffPath: String, type: T.Type) async throws -> [T] {
-        guard let url = URL(string: "\(bffBase)/\(bffPath)") else {
-            throw URLError(.badURL)
-        }
-
-        let (data, response) = try await URLSession.shared.data(from: url)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-
-        return try JSONDecoder().decode([T].self, from: data)
     }
 }

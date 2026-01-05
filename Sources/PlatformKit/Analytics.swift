@@ -29,21 +29,13 @@ public final class AnalyticsImpl: Analytics {
     }
 }
 
+/**
+ *  Pre-defined Analytics Events.
+ */
 public enum AnalyticsEvent {
     case appLaunched
     case tabSelected(title: String)
     case itemSelected(id: Int, type: ItemType, pageName: PageName)
-}
-
-public enum ItemType: String {
-    case post = "post"
-    case friend = "friend"
-}
-
-public enum PageName: String {
-    case feed = "feed"
-    case friends = "friends"
-    case profile = "profile"
 }
 
 public extension AnalyticsEvent {
@@ -69,4 +61,21 @@ public extension AnalyticsEvent {
                 ]
             }
     }
+}
+
+/**
+ *  Types of the selected item's data-model.
+ */
+public enum ItemType: String {
+    case post = "post"
+    case friend = "friend"
+}
+
+/**
+ *  Names of the pages in the app.
+ */
+public enum PageName: String {
+    case feed = "feed"
+    case friends = "friends"
+    case profile = "profile"
 }
