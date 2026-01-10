@@ -139,3 +139,23 @@ This design allows each feature to be:
 - **Isolated**: Features depend only on PlatformKit protocols and their own module code.
 - **Composable**: The shell can add or remove features by updating the factories and `features` array.
 - **Testable**: Analytics and networking can be mocked by providing different implementations of `Analytics` and `Networking` that still conform to the same protocols.
+
+***
+
+## Other Related Repositories
+
+### Shell App:
+Shell - https://github.com/chinthaka01/Wefriendz
+
+### Shared contracts:
+DesignSystem - https://github.com/chinthaka01/DesignSystem
+
+### Micro Frontends:
+Feed Feature - https://github.com/chinthaka01/FeedFeature
+Friends Feature - https://github.com/chinthaka01/FriendsFeature
+Profile Feature - https://github.com/chinthaka01/ProfileFeature
+
+### Isolate Feature Testing Apps:
+Feed Feature Testing App - https://github.com/chinthaka01/FeedFeatureApp
+Friends Feature Testing App - https://github.com/chinthaka01/FriendsFeatureApp
+Profile Feature Testing App - https://github.com/chinthaka01/ProfileFeatureApp
