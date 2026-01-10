@@ -144,18 +144,18 @@ This design allows each feature to be:
 
 ## Other Related Repositories
 
-### Shell App:
-Shell - https://github.com/chinthaka01/Wefriendz
+### App Shell:
+App Shell - https://github.com/chinthaka01/Wefriendz
 
 ### Shared contracts:
 DesignSystem - https://github.com/chinthaka01/DesignSystem
 
-### Micro Frontends:
+### Micro-Feature Modules:
 Feed Feature - https://github.com/chinthaka01/FeedFeature
 Friends Feature - https://github.com/chinthaka01/FriendsFeature
 Profile Feature - https://github.com/chinthaka01/ProfileFeature
 
-### Isolate Feature Testing Apps:
-Feed Feature Testing App - https://github.com/chinthaka01/FeedFeatureApp
-Friends Feature Testing App - https://github.com/chinthaka01/FriendsFeatureApp
-Profile Feature Testing App - https://github.com/chinthaka01/ProfileFeatureApp
+### Isolated Feature Apps:
+Feed Feature App - https://github.com/chinthaka01/FeedFeatureApp
+Friends Feature App - https://github.com/chinthaka01/FriendsFeatureApp
+Profile Feature App - https://github.com/chinthaka01/ProfileFeatureApp
